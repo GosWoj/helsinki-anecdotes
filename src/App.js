@@ -16,15 +16,31 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [points, setPoints] = useState({
+    0: 1,
+    1: 3,
+    2: 4,
+    3: 2,
+    4: 0,
+    5: 1,
+    6: 4,
+  });
 
   const handleRandom = () => {
     let number = Math.floor(Math.random() * 7);
     setSelected(number);
   };
 
+  const handleVote = (id) => {
+    const pointsCopy = { ...points };
+    pointsCopy[id] += 1;
+    setPoints(pointsCopy);
+  };
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <Button text="Vote" handleClick={() => handleVote(selected)} />
       <Button text="Next Anecdote" handleClick={handleRandom} />
     </div>
   );
