@@ -37,11 +37,23 @@ const App = () => {
     setPoints(pointsCopy);
   };
 
+  const highestVote = () => {
+    //Compares values and returns key with the highest value
+    const highest = Object.keys(points).reduce((a, b) =>
+      points[a] > points[b] ? a : b
+    );
+    return highest;
+  };
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
+      <h3>It has {points[selected]} votes</h3>
       <Button text="Vote" handleClick={() => handleVote(selected)} />
       <Button text="Next Anecdote" handleClick={handleRandom} />
+      <h1>Anecdote with the most votes</h1>
+      <p>{anecdotes[highestVote()]}</p>
     </div>
   );
 };
